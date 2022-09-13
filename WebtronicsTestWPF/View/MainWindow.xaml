@@ -1,0 +1,89 @@
+﻿<Window x:Class="WebtronicsTestWPF.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebtronicsTestWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" MinHeight="450" MinWidth="800" Height="450" Width="800">
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="0.4*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <TextBox Name="inputFolderPath" TextWrapping="NoWrap" AcceptsReturn="False" Margin="8" FontSize="14" KeyDown="InputFolderPath_ChangedHandler"></TextBox>
+
+            <ListView Margin="8" Height="380" Name="listViewFolders" ItemsSource="{Binding fileDateLiteViewModels}" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="400" Header="Имя" DisplayMemberBinding="{Binding Path=Name}" />
+                        <GridViewColumn  Width="180" Header="Тип">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=TypeStr}" TextAlignment="Center" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                    </GridView>
+                </ListView.View>
+
+                <ListView.Resources >
+
+                </ListView.Resources>
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <EventSetter Event="MouseDoubleClick" Handler="ListView_DoubleClick" />
+                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            
+        </StackPanel>
+
+
+        <StackPanel Grid.Column="1" Grid.Row="0" Name="fileInfoPanel" Visibility="Visible">
+            
+            <TextBlock x:Name="fileInfoTitle" Text="Атрибуты файла" HorizontalAlignment="Center" Margin="8" />
+
+            <TextBlock x:Name="fileInfoWarning" FontSize="12" Margin="8 12 8 4" HorizontalAlignment="Center" />
+
+            <StackPanel Orientation="Horizontal" Margin="8 12 8 4">
+                <TextBlock Text="Имя: " FontSize="12" />
+                <TextBlock x:Name="fileInfoName" Text="" FontSize="12" />
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" Margin="8 4 8 4">
+                <TextBlock Text="Размерность: " FontSize="12" />
+                <TextBlock x:Name="fileInfoSize" Text="" FontSize="12" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="8 4 8 4">
+                <TextBlock Text="Дата создания: " FontSize="12" />
+                <TextBlock x:Name="fileInfoDateCreation" Text="" FontSize="12" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="8 4 8 4">
+                <TextBlock Text="Дата изменения: " FontSize="12" />
+                <TextBlock x:Name="fileInfoDateWrite" Text="" FontSize="12" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="8 4 8 4">
+                <TextBlock Text="Дата открытия: " FontSize="12" />
+                <TextBlock x:Name="fileInfoDateAccess" Text="" FontSize="12" />
+            </StackPanel>
+
+            <StackPanel x:Name="rowAmountOfFiles" Orientation="Horizontal" Margin="8 4 8 4">
+                <TextBlock Text="Количество файлов: " FontSize="12" />
+                <TextBlock x:Name="fileInfoAmountOfFiles" Text="" FontSize="12" />
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>
